@@ -1,4 +1,8 @@
-const {serverSpecs} = require('./actions')
+const {serverSpecs, setroom, roomFilter} = require('./actions')
+const Filter = require('./chatfilter')
+
+const KibbleFilter = new Filter()
+
 const checkForCommand = (str) => {
   const root = str.toString().trim().toLowerCase();
   if (root.includes("!kibble")) {
@@ -11,14 +15,17 @@ const checkForCommand = (str) => {
 
 const commandMap = {
   invite: (email) => {return 'invites will be available very soon!'},
-  specs: () => serverSpecs()
+  specs: () => serverSpecs(),
+  setroom: (type, messageEvent) => KibbleFilter.setFilter(type, messageEvent)
+  
+
 };
 
 const cmds = Object.keys(commandMap);
 const mapCommand = (command) => {
   if (cmds.includes(command[1])) {
     const action = commandMap[command[1]];
-    return action(2);
+    return action(command[2]);
   } else {
     return false;
   }
@@ -31,6 +38,7 @@ const formatCmd = (command) => {
 
 module.exports = (kibble) => {
   kibble.on("newChatMessage", async (message) => {
+      KibbleFilter.filter(message)
     const isCommand = checkForCommand(message.content);
     if (isCommand) {
       const clientCommand = formatCmd(message.content);
@@ -43,7 +51,7 @@ module.exports = (kibble) => {
         message.reply(`${response}`, { mentionUser: true, whispered: true });
       }
     }
-    console.log(isCommand, message.content);
+    // console.log(isCommand, message.content);
   });
 };
 

@@ -1,3 +1,6 @@
+
+
+var exeArgs = process.argv.slice(2); if(exeArgs[0] == "--start") someFunction();
 if (message.content == prefix + 'flip') {
 		await message.delete()
 		let result = (Math.random() >= 0.5) ? "Heads" : "Tails";
