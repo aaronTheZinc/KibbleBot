@@ -1,8 +1,7 @@
-const {serverSpecs, setroom, roomFilter} = require('./actions')
-const Filter = require('./chatfilter')
+const { serverSpecs, userTimeOut, isTimedOut } = require("./actions");
+const Filter = require("../Chat/chatfilter");
 
-const KibbleFilter = new Filter()
-
+const KibbleFilter = new Filter();
 const checkForCommand = (str) => {
   const root = str.toString().trim().toLowerCase();
   if (root.includes("!kibble")) {
@@ -13,13 +12,23 @@ const checkForCommand = (str) => {
   }
 };
 
-const commandMap = {
-  invite: (email) => {return 'invites will be available very soon!'},
-  specs: () => serverSpecs(),
-  setroom: (type, messageEvent) => KibbleFilter.setFilter(type, messageEvent)
-  
 
+
+
+const commandMap = {
+  invite: (email) => {
+    return "invites will be available very soon!";
+  },
+  specs: () => serverSpecs(),
+  setroom: (type, messageEvent) => KibbleFilter.setFilter(type, messageEvent),
+  timeout: (str) => userTimeOut(str).setUserTimeout(),
 };
+
+
+
+
+
+
 
 const cmds = Object.keys(commandMap);
 const mapCommand = (command) => {
@@ -31,14 +40,27 @@ const mapCommand = (command) => {
   }
 };
 const formatCmd = (command) => {
+  //split into blocks
   const blx = command.split(" ");
   const commands = blx.map((str) => str.trim());
-  return commands
+  return commands;
 };
 
 module.exports = (kibble) => {
   kibble.on("newChatMessage", async (message) => {
-      KibbleFilter.filter(message)
+    
+    const creator = kibble.rooms.current.creator;
+    const _sender = message.author.username;
+    console.log(_sender)
+    KibbleFilter.filter(message);
+    if(isTimedOut(_sender)) {
+     await message.delete()
+      message.reply('you are timed out!',{
+        mentionUser: true,
+        whispered: true,
+      })
+    }
+
     const isCommand = checkForCommand(message.content);
     if (isCommand) {
       const clientCommand = formatCmd(message.content);
@@ -47,12 +69,10 @@ module.exports = (kibble) => {
       if (!resultedCmd) {
         return;
       } else {
-        const response = resultedCmd
+        const response = resultedCmd;
         message.reply(`${response}`, { mentionUser: true, whispered: true });
       }
     }
     // console.log(isCommand, message.content);
   });
 };
-
-

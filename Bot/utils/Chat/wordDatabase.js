@@ -1,4 +1,5 @@
 exports.prohibitedWords = [
+  "r578" ,
   "4r5e",
   "5h1t",
   "5hit",
@@ -303,7 +304,6 @@ exports.prohibitedWords = [
   "nazi",
   "nigg3r",
   "nigg4h",
-  "nigga",
   "niggah",
   "niggas",
   "niggaz",

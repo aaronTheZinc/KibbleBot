@@ -1,19 +1,25 @@
 const { prohibitedWords } = require("./wordDatabase");
 class filter {
   constructor() {
-    this.currentFiler = "DEFAULT";
+    this.currentFitler = "DEFAULT";
     this.roomTypes = ["pg"];
   }
-  pgFilter = (message, messageEvent) => {
+  pgFilter = (message, msgDelete) => {
     if (prohibitedWords.includes(message)) {
       console.log("includes prohibited words!");
+      msgDelete.delete()
+      
     }
   };
-  filter = ({ content }) => {
-    const { currentFiler } = this;
-    switch (currentFiler) {
+  filter = (message) => {
+    const{ content } = message
+    const { currentFilter } = this;
+    switch (currentFilter) {
       case "pg":
-        console.log("PG is Set!");
+        this.pgFilter(content, message)
+
+      default: 
+      this.pgFilter(content, message)  
     }
   };
 
@@ -22,12 +28,9 @@ class filter {
     console.log('attempting to set filter')
     if (roomTypes.includes(type.toString().trim())) {
         console.log('Does Include Filter')
-      switch (this.currentFiler) {
-        case "pg":
-            console.log('new Filter Set!');
-          return this.currentFiler = "pg"; 
-      }
+        this.currentFilter = type
     } else if (type === "DEFAULT") {
+      this.currentFilter
       return;
     } else {
       return messageEvent.reply(`${type} is not command`, {
