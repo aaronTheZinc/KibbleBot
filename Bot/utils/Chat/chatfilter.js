@@ -1,11 +1,14 @@
-const { prohibitedWords } = require("./wordDatabase");
+const { regex } = require("./wordDatabase");
+const reg = new RegExp(regex());
+
 class filter {
   constructor() {
     this.currentFitler = "DEFAULT";
     this.roomTypes = ["pg"];
   }
   pgFilter = (message, msgDelete) => {
-    if (prohibitedWords.includes(message)) {
+    
+    if (reg.test(message)) {
       console.log("includes prohibited words!");
       msgDelete.delete()
       

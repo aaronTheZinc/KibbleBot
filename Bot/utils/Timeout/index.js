@@ -16,10 +16,9 @@ class timeOut {
 
     //   const endTime =
 
-    var now = new Date();
-    now.setMinutes(Date.now() + ms(time.toString().trim()));
+    const endTime = (Date.now() + ms(time.toString().trim()));
     console.log(ms(time.toString().trim())) // timestamp
-    const endTime = new Date(now); // Date object
+
 
     this.timedOutUsers.users.push({ username: username, timeOutEnd: endTime });
     const penaltyInex = this.timedOutUsers.users.findIndex(

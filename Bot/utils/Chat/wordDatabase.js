@@ -1,4 +1,4 @@
-exports.prohibitedWords = [
+const words = [
   "r578" ,
   "4r5e",
   "5h1t",
@@ -450,3 +450,5 @@ exports.prohibitedWords = [
   "xrated",
   "xxx",
 ];
+exports.regex = () => `(|^)(${words.join("|")})(?= |$)`
+

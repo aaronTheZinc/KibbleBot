@@ -21,7 +21,7 @@ const commandMap = {
   },
   specs: () => serverSpecs(),
   setroom: (type, messageEvent) => KibbleFilter.setFilter(type, messageEvent),
-  timeout: (str) => userTimeOut(str).setUserTimeout(),
+  timeout: (str, messageEvent) => userTimeOut(str, messageEvent).setUserTimeout(),
 };
 
 
@@ -31,10 +31,10 @@ const commandMap = {
 
 
 const cmds = Object.keys(commandMap);
-const mapCommand = (command) => {
+const mapCommand = (command, messageEvent) => {
   if (cmds.includes(command[1])) {
     const action = commandMap[command[1]];
-    return action(command[2]);
+    return action(command[2], messageEvent)
   } else {
     return false;
   }
@@ -65,7 +65,7 @@ module.exports = (kibble) => {
     if (isCommand) {
       const clientCommand = formatCmd(message.content);
       console.log("formatted", clientCommand[1]);
-      const resultedCmd = mapCommand(clientCommand);
+      const resultedCmd = mapCommand(clientCommand, message);
       if (!resultedCmd) {
         return;
       } else {

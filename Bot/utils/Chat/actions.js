@@ -14,23 +14,30 @@ exports.serverSpecs = () => {
 
 //Kibble Timeout
 const KBT = new TimeOut();
-exports.userTimeOut = (client) => {
+exports.userTimeOut = (client, messageEvent) => {
   console.log('TIMEOUT CLIENT -->', client)
   const root = client.split("/");
   const username = root[0];
   const time = root[1];
-
-  return {
+  console.log('usernaem ---->', username)
+  return 'kibble' == username? {
     currentTimeOut: !KBT.timedOutUsers.users
       ? "No Users"
       : KBT.timedOutUsers.users.map((user) => user.username),
-    setUserTimeout: () => KBT.timeOut({username, time}),
-  };
+       setUserTimeout: () => messageEvent.reply('you CANNOT out pizza the hut!')
+  }: {
+      currentTimeOut: !KBT.timedOutUsers.users
+        ? "No Users"
+        : KBT.timedOutUsers.users.map((user) => user.username),
+      setUserTimeout: () => KBT.timeOut({username, time}),
+    };
+
+  
 };
 
 var dateInPast = function (firstDate, secondDate) {
   return !(firstDate <= secondDate)
-};
+};  
 
 exports.isTimedOut = (username) => {
   const user = KBT.timedOutUsers.users.find(
@@ -40,6 +47,7 @@ exports.isTimedOut = (username) => {
     // KBT.timedOutUsers.users.find( (user) => user.username === username ).timeOutEnd = "new time"
     var past = user.timeOutEnd
     var today = Date.now();
+    console.log('DATES =>', past, today)
     const isInTimeOut = dateInPast(past, today);
     console.log("is times out", isInTimeOut);
     return isInTimeOut;
