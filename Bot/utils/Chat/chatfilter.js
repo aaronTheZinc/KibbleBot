@@ -1,40 +1,37 @@
 const { prohibitedWords } = require("./wordDatabase");
 class filter {
   constructor() {
-    this.currentFitler = "DEFAULT";
-    this.roomTypes = ["pg"];
+    this.currentFilter = "DEFAULT";
+    this.roomTypes = ["pg", "disable"];
   }
   pgFilter = (message, msgDelete) => {
     if (prohibitedWords.includes(message)) {
       console.log("includes prohibited words!");
-      msgDelete.delete()
-      
+      msgDelete.delete();
     }
   };
   filter = (message) => {
-    const{ content } = message
+    const { content } = message;
     const { currentFilter } = this;
     switch (currentFilter) {
       case "pg":
-        messageEvent.reply("Setting room filter to PG (Parental Guidence)");
-        this.pgFilter(content, message)
+        this.pgFilter(content, message);
       case "disable":
-        messageEvent.reply("Disabling chat filter for this room");
         break;
 
-      default: 
-      this.pgFilter(content, message)  
+      default:
+        this.pgFilter(content, message);
     }
   };
 
   setFilter = (type, messageEvent) => {
     const { roomTypes } = this;
-    console.log('attempting to set filter')
+    console.log("attempting to set filter");
     if (roomTypes.includes(type.toString().trim())) {
-        console.log('Does Include Filter')
-        this.currentFilter = type
+      console.log("Does Include Filter");
+      this.currentFilter = type;
     } else if (type === "DEFAULT") {
-      this.currentFilter
+      this.currentFilter;
       return;
     } else {
       return messageEvent.reply(`${type} is not command`, {

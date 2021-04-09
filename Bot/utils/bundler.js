@@ -1,6 +1,6 @@
 const chat = require('./Chat/chat')
-const initialie = require('./initialize')
+const initialize = require('./initialize')
 module.exports = (kibble) => {
     chat(kibble)
-    initialie(kibble)
+    initialize(kibble)
 }
