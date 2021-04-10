@@ -22,10 +22,6 @@ class timeOut {
     const endTime = new Date(now); // Date object
 
     this.timedOutUsers.users.push({ username: username, timeOutEnd: endTime });
-    const penaltyInex = this.timedOutUsers.users.findIndex(
-      (user) => user.username === username
-    );
-    this.timedOutUsers.users.splice(penaltyInex, penaltyInex);
   };
 }
 module.exports = timeOut;
