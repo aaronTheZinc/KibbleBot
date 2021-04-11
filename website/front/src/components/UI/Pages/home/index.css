@@ -79,3 +79,7 @@
  .bubble-container:hover {
     top: -10px;
   }
+  
+  body {
+    background-color: #151a21;
+  }

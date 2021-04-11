@@ -4,7 +4,7 @@ const {
   REDIS_PASSWORD = 'secret'
 } = process.env
 
-export const REDIS_OPTIONS: RedisOptions = {
+export const REDIS_OPTIONS = {
   port: +REDIS_PORT,
   host: REDIS_HOST,
   password: REDIS_PASSWORD

@@ -14,7 +14,6 @@ const stateReducer = (state, action) => {
 const initialBotState = { 
     botName: '',
     profileUrl:'',
-    d
 }
 const newBotReducer = (state, action) => {
 

@@ -3,13 +3,17 @@ class Bot {
      this.new = {
          botName: '',
          profileImage: '',
-         tokens, commands:''
+         tokens: {
+             token: '',
+             refreshToken: ''
+         },
+         commands: []
+
      }
-
-    create = ({ botName, imageUrl, tokens, commands,  }) => {
-
-    }
     
+}
+create = ({ botName, imageUrl, tokens, commands,  }) => {
+
 }
 }
 export {Bot}

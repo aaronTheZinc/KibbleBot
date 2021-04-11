@@ -1,4 +1,8 @@
-import { IN_PROD } from './app'
+const { 
+    NODE_ENV = "development"
+} = process.env
+
+const IN_PROD = NODE_ENV === 'production'
 
 const ONE_HOUR = 1000 * 60 * 60
 
