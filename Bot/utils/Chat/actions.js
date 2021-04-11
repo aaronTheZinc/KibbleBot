@@ -40,6 +40,7 @@ exports.isTimedOut = (username) => {
     // KBT.timedOutUsers.users.find( (user) => user.username === username ).timeOutEnd = "new time"
     var past = user.timeOutEnd
     var today = Date.now();
+    console.log(past, today)
     const isInTimeOut = dateInPast(past, today);
     console.log("is times out", isInTimeOut);
     return isInTimeOut;

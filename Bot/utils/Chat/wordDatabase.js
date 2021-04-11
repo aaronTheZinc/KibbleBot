@@ -1,4 +1,4 @@
-exports.prohibitedWords = [
+const array = [
   "r578" ,
   "4r5e",
   "5h1t",
@@ -348,6 +348,7 @@ exports.prohibitedWords = [
   "pissing",
   "pissoff",
   "poop",
+  "pokimane",
   "porn",
   "porno",
   "pornography",
@@ -452,4 +453,6 @@ exports.prohibitedWords = [
   "willy",
   "xrated",
   "xxx",
+  "swear"
 ];
+exports.reg = `(|^)(${array.join("|")})(?= |$)`

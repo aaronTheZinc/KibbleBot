@@ -1,26 +1,27 @@
-const { prohibitedWords } = require("./wordDatabase");
+const { reg } = require("./wordDatabase");
+const expression = new RegExp(reg)
 class filter {
   constructor() {
     this.currentFilter = "DEFAULT";
     this.roomTypes = ["pg", "disable"];
   }
-  pgFilter = (message, msgDelete) => {
-    if (prohibitedWords.includes(message)) {
-      console.log("includes prohibited words!");
-      msgDelete.delete();
+  pgFilter = (message) => {
+    if (expression.test(message.content)) {
+      console.log("includes prohibited words!-->", message.content);
+      message.delete();
     }
   };
   filter = (message) => {
-    const { content } = message;
     const { currentFilter } = this;
     switch (currentFilter) {
       case "pg":
-        this.pgFilter(content, message);
+        this.pgFilter(message);
+        break;
       case "disable":
         break;
 
       default:
-        this.pgFilter(content, message);
+        this.pgFilter(message);
     }
   };
 

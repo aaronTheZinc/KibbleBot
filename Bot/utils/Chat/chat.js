@@ -1,7 +1,7 @@
 const { serverSpecs, userTimeOut, isTimedOut } = require("./actions");
-const Filter = require("../Chat/chatfilter");
+const Filter = require("./chatfilter");
 const nodemailer = require('nodemailer'); // do (npm install nodemailer)
-const { createEmail } = require('./email')
+// const { createEmail } = require('./email')
 const KibbleFilter = new Filter();
 const checkForCommand = (str) => {
   const root = str.toString().trim().toLowerCase();
@@ -77,24 +77,26 @@ const formatCmd = (command) => {
   return commands;
 };
 
-module.exports = (kibble) => {
+module.expor = (kibble) => {
   kibble.on("newChatMessage", async (message) => {
     
     const _sender = message.author.username;
     console.log(_sender)
     KibbleFilter.filter(message);
+    const isCommand = checkForCommand(message.content);
     if(isTimedOut(_sender)) {
+      console.log(message.author.username, 'msg =<', message.content,'---is timed out', true, ' is Command:', isCommand )
      await message.delete()
       message.reply('you are timed out!',{
         mentionUser: true,
         whispered: true,
       })
+    } else {
+      console.log(message.author.username,'msg =<', message.content, '---is timed out', false, ' is Command:', isCommand )
     }
 
-    const isCommand = checkForCommand(message.content);
     if (isCommand) {
       const clientCommand = formatCmd(message.content);
-      console.log("formatted", clientCommand[1]);
       const resultedCmd = mapCommand(clientCommand, message);
       if (!resultedCmd) {
         return;

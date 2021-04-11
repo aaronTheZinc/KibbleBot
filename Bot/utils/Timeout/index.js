@@ -1,10 +1,4 @@
-const ms = require("@naval-base/ms").default;
-
-const syncWait = (ms, next) => {
-  const end = Date.now() + ms;
-  while (Date.now() < end) continue;
-};
-
+const ms = require('@naval-base/ms').default
 class timeOut {
   constructor() {
     this.timedOutUsers = {
@@ -28,4 +22,4 @@ class timeOut {
     this.timedOutUsers.users.splice(penaltyInex, penaltyInex);
   };
 }
-module.exports = timeOut;
+export default timeOut;
