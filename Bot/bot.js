@@ -1,11 +1,9 @@
-const { Client } = require("dogehouse.js");
-const kibble = new Client();
+const Client = require('./Client')
 const prompts = require('prompts');
-const addlisteners = require('./utils/bundler')
+const addlisteners = require('./utils/bundler').default
 require("dotenv").config();
 
 const prompt = async (questions) => await prompts(questions);
-
 
 exports.spawnKibble = async (room) => {
     kibble.connect(process.env.TOKEN, process.env.TOKEN_REFRESH).then(async () => {

@@ -1,5 +1,5 @@
-const prompt = require('prompt')
-const {start} = require('./Bot/spawn')
+import prompt from 'prompt'
+import { start } from './Bot/spawn'
   prompt.start();
 
 

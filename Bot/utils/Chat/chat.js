@@ -77,7 +77,7 @@ const formatCmd = (command) => {
   return commands;
 };
 
-module.exports = (kibble) => {
+module.expor = (kibble) => {
   kibble.on("newChatMessage", async (message) => {
     
     const _sender = message.author.username;

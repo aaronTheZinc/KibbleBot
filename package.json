@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
+    "start": "nodemon index.js",
     "commit": "",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

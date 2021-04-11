@@ -348,6 +348,7 @@ const array = [
   "pissing",
   "pissoff",
   "poop",
+  "pokimane",
   "porn",
   "porno",
   "pornography",
