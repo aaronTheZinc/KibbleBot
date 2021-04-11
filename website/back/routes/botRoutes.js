@@ -1,10 +1,13 @@
 import express from 'express';
-const userRouter = express.Router();
+const botRouter = express.Router();
 import {
-  getUsers,
-  getUserById,
-  getUserProfile,
-} from '../controllers/userController.js';
-import { ensureAuth }
+  getBots,
+  getBotById,
+  updateBot,
+} from '../controllers/botController.js';
 
-export default userRouter;
+botRouter.get('/', getBots)
+botRouter.get('/:id', getBotById)
+botRouter.post('/')
+
+export default botRouter;

@@ -5,8 +5,8 @@ import {
   getUserById,
   getUserProfile,
 } from '../controllers/userController.js';
-import { protect } from '../middleware/authMiddleware.js';
-userRouter.route('/').get(protect, getUsers);
-userRouter.route('/id/:id').get(protect, getUserById);
-userRouter.route('/profile').get(protect, getUserProfile);
+userRouter.use('/', getUsers);
+userRouter.use('/:id', getUserById)
+userRouter.use('/profile', getUserProfile)
+
 export default userRouter;

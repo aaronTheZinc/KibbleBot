@@ -1,10 +1,13 @@
-const GithubStrategy = require('passport-github2').Strategy
-const mongoose = require('mongoose')
-const User = require('../models/modelUser')
+import GitHubStrategy from 'passport-github2'
+GitHubStrategy.Strategy
+import mongoose from 'mongoose'
+import User from '../models/userModel.js'
+import dotenv from 'dotenv'
+dotenv.config()
 
-module.exports = function (passport) {
+const githubPassport = (passport) => {
   passport.use(
-    new GithubStrategy(
+    new GitHubStrategy(
       {
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -17,6 +20,9 @@ module.exports = function (passport) {
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
           image: profile.photos[0].value,
+          metadata: {
+              isAdmin: false
+          }
         }
 
         try {
@@ -43,3 +49,5 @@ module.exports = function (passport) {
     User.findById(id, (err, user) => done(err, user))
   })
 }
+
+export default githubPassport

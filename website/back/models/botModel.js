@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const BotSchema = new mongoose.Schema({
   githubId: {
@@ -18,10 +18,14 @@ const BotSchema = new mongoose.Schema({
   refreshToken: {
       type: String
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  createdBy: {
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'User'
   },
+}, {
+      timestamps: true
 })
 
-module.exports = mongoose.model('Bot', BotSchema)
+const Bot =  mongoose.model('Bot', BotSchema)
+
+export default Bot

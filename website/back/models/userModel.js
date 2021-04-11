@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const UserSchema = new mongoose.Schema({
   githubId: {
@@ -20,10 +20,15 @@ const UserSchema = new mongoose.Schema({
   image: {
     type: String,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  hasBots: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Bot'
+  }],
+},
+    {
+    timestamps: true
 })
 
-module.exports = mongoose.model('User', UserSchema)
+const User = mongoose.model('User', UserSchema)
+
+export default User

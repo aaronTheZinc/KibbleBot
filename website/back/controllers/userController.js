@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler';
-import User from '../models/user.model.js';
+import User from '../models/userModel.js';
 
 const getUsers = asyncHandler(async (req, res) => {
   const users = await User.find({});
@@ -28,5 +28,13 @@ const getUserProfile = asyncHandler(async (req, res) => {
     throw new Error('User not found');
   }
 });
+
+// const updateUser = asyncHandler(async (req, res) => {
+//     const user = await User.findById(req.user.id)
+    
+//     if(user) {
+//         user.githubId = req.body.githubId || user.name
+//     }
+// }
 
 export { getUsers, getUserById, getUserProfile };

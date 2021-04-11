@@ -15,4 +15,4 @@ const ensureGuest = (req, res, next) => {
     }
 }
 
-exports = { ensureAuth, ensureGuest }
+export { ensureAuth, ensureGuest }

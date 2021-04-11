@@ -1,4 +1,4 @@
-
+import {loginWithGitHub} from './actions'
 
 const initialAppState = {
     isAuthenticated: false,
@@ -7,10 +7,21 @@ const initialAppState = {
 
 const stateReducer = (state, action) => {
     switch(action.type) {
-
+        case "github/auth":
+            loginWithGitHub()
     }
 }
+const initialBotState = { 
+    botName: '',
+    profileUrl:'',
+    d
+}
+const newBotReducer = (state, action) => {
+
+}
+
  export default {
      AppReducer: {initialAppState, stateReducer},
+     newBot: {}
      
  }

@@ -12,5 +12,5 @@ export const AppState = ({children}) => {
   const { initialAppState, stateReducer } = AppReducer;
   const [state, dispatch] = useReducer(stateReducer, initialAppState);
 
-  return <Provider value={(state, dispatch)}>{children}</Provider>;
+  return <Provider value={{state, dispatch}}>{children}</Provider>;
 };
