@@ -31,5 +31,5 @@ export const SESSION_OPTIONS = {
   },
   rolling: true,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: true
 }

@@ -1,15 +1,12 @@
-import mongoose from 'mongoose';
-
 const {
-  MONGO_USERNAME = 'admin',
-  MONGO_PASSWORD = 'secret',
-  MONGO_HOST = 'localhost:27017',
-  MONGO_DATABASE = 'auth'
+  MONGO_USERNAME,
+  MONGO_PASSWORD,
+  MONGO_HOST,
+  MONGO_DATABASE
 } = process.env
 
-export const MONGO_URI = `mongodb://${MONGO_USERNAME}:${
-  encodeURIComponent(MONGO_PASSWORD)
-}@${MONGO_HOST}/${MONGO_DATABASE}`
+//stopped working for some unkown reason
+// export const MONGO_URI = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DATABASE}?retryWrites=true&w=majority`
 
 export const MONGO_OPTIONS = {
   useNewUrlParser: true,

@@ -1,20 +1,18 @@
 import express from 'express';
 import dotenv from 'dotenv'
+const ENV = dotenv.config()
 import path from 'path'
-dotenv.config({ path: './.env' })
 import passport from 'passport'
 import GitHubStrategy from 'passport-github2'
-GitHubStrategy.Strategy
+const OauthStrategy = GitHubStrategy.Strategy
 import connectDB from './db.js'
 connectDB()
-import store from './redis.js'
 import {SESSION_OPTIONS} from './config/session.js'
-import { createServer } from 'http'
 import cors from 'cors'
 import helmet from 'helmet'
 import session from 'express-session'
+import morgan from 'morgan'
 const app = express();
-const server = createServer(app)
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
@@ -28,16 +26,34 @@ import { notFound, errorHandler } from './middlewares/errorMiddlewares.js'
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
-app.use(cors({
-    origin: process.env.ORIGIN_URL
-}))
-app.use(helmet())
+// app.use(cors({
+//     origin: process.env.ORIGIN_URL
+// }))
+// app.use(helmet())
 
 //Session
-app.use(
-    session({SESSION_OPTIONS, store})
-)
+import connectRedis from 'connect-redis'
+import Redis from 'ioredis'
+import {REDIS_OPTIONS} from './config/redis.js'
 
+const RedisStore = connectRedis(session)
+const client = new Redis(REDIS_OPTIONS)
+client.on('error', function (error) {
+  console.dir(error)
+  console.error("Redis Error")
+})
+client.on("ready", function() {
+  console.dir("Redis connection is ready")
+})
+client.on("end", function() {
+  console.dir("Redis connection closed")
+})
+
+const store = new RedisStore({client})
+
+app.use(
+    session({ ...SESSION_OPTIONS, store})
+)
 //Pasport Auth
 
 //Passport Routes
@@ -87,4 +103,4 @@ app.use(errorHandler)
 
 const PORT = process.env.PORT
 
-app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} environment on  ${PORT}`))
+app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} environment on ${PORT}`))
