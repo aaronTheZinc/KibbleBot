@@ -1,19 +1,18 @@
 import mongoose from 'mongoose';
 
-const connectDB = async () => {
-  try {
-    const connect = await mongoose.connect(process.env.MONGO_URI, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-      useCreateIndex: true,
-    })
+const {
+  MONGO_USERNAME = 'admin',
+  MONGO_PASSWORD = 'secret',
+  MONGO_HOST = 'localhost:27017',
+  MONGO_DATABASE = 'auth'
+} = process.env
 
-    console.log(`MongoDB Connected: ${connect.connection.host}`)
+export const MONGO_URI = `mongodb://${MONGO_USERNAME}:${
+  encodeURIComponent(MONGO_PASSWORD)
+}@${MONGO_HOST}/${MONGO_DATABASE}`
 
-  } catch (error) {
-      console.error(`Error: ${error.message}`)
-      process.exit(1)
-  }
+export const MONGO_OPTIONS = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
 }
-
-export default connectDB

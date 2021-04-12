@@ -1,6 +1,7 @@
 class Bot {
     constructor() {
      this.new = {
+         discordId: '',
          botName: '',
          profileImage: '',
          tokens: {
@@ -12,7 +13,7 @@ class Bot {
      }
     
 }
-create = ({ botName, imageUrl, tokens, commands,  }) => {
+create = ({ discordId, botName, imageUrl, tokens, commands,  }) => {
 
 }
 }

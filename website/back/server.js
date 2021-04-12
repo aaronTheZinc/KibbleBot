@@ -1,22 +1,25 @@
 import express from 'express';
+import dotenv from 'dotenv'
+import path from 'path'
+dotenv.config({ path: './.env' })
 import passport from 'passport'
-import githubPassport from './auth/passport.js'
-githubPassport(passport)
-import connectDB from './config/db.js'
+import GitHubStrategy from 'passport-github2'
+GitHubStrategy.Strategy
+import connectDB from './db.js'
 connectDB()
+import store from './redis.js'
+import {SESSION_OPTIONS} from './config/session.js'
 import { createServer } from 'http'
 import cors from 'cors'
 import helmet from 'helmet'
 import session from 'express-session'
-import Redis from 'ioredis'
-import ConnectRedis from 'connect-redis'
-const RedisStore = ConnectRedis(session)
 const app = express();
 const server = createServer(app)
 
-//Config Files
-import {REDIS_OPTIONS} from './config/redis.js'
-import { SESSION_OPTIONS } from './config/session.js'
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+}
+
 //Route Imports
 import userRouter from './routes/userRoutes.js'
 import botRouter from './routes/botRoutes.js'
@@ -29,33 +32,15 @@ app.use(cors({
     origin: process.env.ORIGIN_URL
 }))
 app.use(helmet())
-app.enable('trust proxy')
-
-const RedisClient = new Redis(REDIS_OPTIONS)
-
-import dotenv from 'dotenv';
-dotenv.config();
-
-app.get('/', (req, res) => {
-    res.send('test123')
-})
 
 //Session
 app.use(
-    session({
-      ...SESSION_OPTIONS,
-      secret: process.env.SESSION_SECRET,
-      resave: false,
-      saveUninitialized: true,
-      store: new RedisStore(RedisClient),
-      cookie: {
-          //lasts 1 day
-        maxAge: 24*60*60*1000
-    }
-    })
+    session({SESSION_OPTIONS, store})
 )
 
-//Passport AUTH
+//Pasport Auth
+
+//Passport Routes
 
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
@@ -67,7 +52,7 @@ app.get('/auth/github/callback',
     res.redirect('/');
 });
 
-app.get('/logout', function(req, res){
+app.get('/auth/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
@@ -78,6 +63,24 @@ app.use(passport.session())
 //Routes
 app.use('/api/bots', botRouter)
 app.use('/api/users', userRouter)
+
+const __dirname = path.resolve()
+app.use('/uploads', 
+  express.static(path.join(__dirname, '/uploads'))
+)
+
+//Production Build
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')))
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  )
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running....')
+  })
+}
 
 app.use(notFound)
 app.use(errorHandler)

@@ -27,7 +27,8 @@ const createBot = asyncHandler(async (req, res) => {
         displayName,
         image,
         token,
-        refreshToken
+        refreshToken,
+        createdBy
     } = req.body
 
     const bot = new Bot({
@@ -35,7 +36,8 @@ const createBot = asyncHandler(async (req, res) => {
         displayName: displayName,
         image: image,
         token: token,
-        refreshToken: refreshToken
+        refreshToken: refreshToken,
+        createdBy: createdBy
     })
 
     const createdBot = await bot.save()
@@ -49,7 +51,8 @@ const updateBot = asyncHandler(async (req, res) => {
         displayName,
         image,
         token,
-        refreshToken
+        refreshToken,
+        createdBy
     } = req.body
 
     const bot = await Bot.findById(req.params.id)
@@ -59,7 +62,8 @@ const updateBot = asyncHandler(async (req, res) => {
         bot.displayName = displayName,
         bot.image = image,
         bot.token = token,
-        bot.refreshToken = refreshToken
+        bot.refreshToken = refreshToken,
+        bot.createdBy = createdBy
 
         const updatedBot = await bot.save()
         res.json(updatedBot)

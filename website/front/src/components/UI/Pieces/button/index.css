@@ -1,0 +1,10 @@
+.primary-button {
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+    font-size: 20;
+    font-weight: bolder;
+}
+.primary-button:hover {
+    top: -10px;
+  }

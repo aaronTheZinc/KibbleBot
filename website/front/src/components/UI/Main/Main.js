@@ -9,8 +9,9 @@ export default () => {
     <Nav/>
 
       <Router>
-        <Route path="/home" component={Home} />
-        <Route path="/hub/newbot" component={CreateNewBot} />
+      <Route path="/home" component={Home} />
+
+        <Route path="/dashboard/newbot" component={CreateNewBot} />
       </Router>
     </>
   );

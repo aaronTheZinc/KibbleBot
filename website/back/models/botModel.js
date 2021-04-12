@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const BotSchema = new mongoose.Schema({
+const BotSchema = mongoose.Schema({
   githubId: {
     type: String,
     required: true,
@@ -26,6 +26,6 @@ const BotSchema = new mongoose.Schema({
       timestamps: true
 })
 
-const Bot =  mongoose.model('Bot', BotSchema)
+const Bot = mongoose.model('Bot', BotSchema)
 
 export default Bot

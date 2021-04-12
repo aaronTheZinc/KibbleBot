@@ -1,26 +1,38 @@
-import {loginWithGitHub} from './actions'
+import { loginWithGitHub } from "./actions";
 
 const initialAppState = {
-    isAuthenticated: false,
-    token: null
-}
+  isAuthenticated: false,
+  token: null,
+};
 
 const stateReducer = (state, action) => {
-    switch(action.type) {
-        case "github/auth":
-            loginWithGitHub()
-    }
-}
-const initialBotState = { 
+  switch (action.type) {
+    case "github/auth":
+      loginWithGitHub();
+  }
+};
+const initialBotState = {
+  botName: "",
+  profileUrl: "",
+};
+const newBotReducer = (state, action) => {};
+
+const initialNewBotState = {
     botName: '',
-    profileUrl:'',
+    profileImageUrl: '',
+    token: '',
+    refreshToken: ''
 }
-const newBotReducer = (state, action) => {
 
-}
+const setNewBotReducer = (state, action) => {
+  switch (action.type) {
+    case "profile":
 
- export default {
-     AppReducer: {initialAppState, stateReducer},
-     newBot: {}
-     
- }
+  }
+};
+
+export default {
+  AppReducer: { initialAppState, stateReducer },
+  newBot: {initialAppState, setNewBotReducer},
+
+};
