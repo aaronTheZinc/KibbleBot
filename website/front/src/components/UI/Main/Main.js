@@ -9,6 +9,7 @@ export default () => {
     <Nav/>
 
       <Router>
+      <Redirect to="./home" />
       <Route path="/home" component={Home} />
 
         <Route path="/dashboard/newbot" component={CreateNewBot} />
