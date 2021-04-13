@@ -1,4 +1,4 @@
-import { loginWithGitHub } from "./actions";
+import { loginWithGitHub, loginWithSpotify } from "./actions";
 
 const initialAppState = {
   isAuthenticated: false,
@@ -9,17 +9,24 @@ const stateReducer = (state, action) => {
   switch (action.type) {
     case "github/auth":
       loginWithGitHub();
+    case "spotify/auth":
+      loginWithSpotify()
   }
 };
+
 const initialBotState = {
-  botName: "",
-  profileUrl: "",
+  displayName: "",
+  image: "",
 };
+
+const initialSpotifyState = {
+  
+}
 const newBotReducer = (state, action) => {};
 
 const initialNewBotState = {
-    botName: '',
-    profileImageUrl: '',
+    displayName: 'KibbleBot',
+    image: '',
     token: '',
     refreshToken: ''
 }
