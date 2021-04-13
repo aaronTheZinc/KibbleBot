@@ -21,15 +21,17 @@ if (process.env.NODE_ENV === 'development') {
 //Route Imports
 import userRouter from './routes/userRoutes.js'
 import botRouter from './routes/botRoutes.js'
+//3rd Part API Imports
+import spotifyApi from './services/spotify.js'
 //Middlewae Imports
 import { notFound, errorHandler } from './middlewares/errorMiddlewares.js'
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
-// app.use(cors({
-//     origin: process.env.ORIGIN_URL
-// }))
-// app.use(helmet())
+app.use(cors({
+    origin: process.env.ORIGIN_URL
+}))
+app.use(helmet())
 
 //Session
 import connectRedis from 'connect-redis'
@@ -79,6 +81,7 @@ app.use(passport.session())
 //Routes
 app.use('/api/bots', botRouter)
 app.use('/api/users', userRouter)
+app.use('/api/spotify', spotifyApi)
 
 const __dirname = path.resolve()
 app.use('/uploads', 
