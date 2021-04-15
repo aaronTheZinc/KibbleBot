@@ -1,0 +1,16 @@
+body {
+    background-color: #0b0e11;
+
+}
+
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: #FD6868;
+    background: #DEE3EA;
+}
+
+::selection {
+    color: #FD6868;
+    background: #DEE3EA;
+}

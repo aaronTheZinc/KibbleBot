@@ -1,0 +1,26 @@
+{
+    "client": {
+        "fullName": "John Doe",
+         "bots": [
+             {
+                 "bot_name": "Saturn",
+                 "id": "i02zj"
+             },             {
+                "bot_name": "jupiter",
+                "id": "i02zj"
+            },             {
+                "bot_name": "mars",
+                "id": "i02zj"
+            },             {
+                "bot_name": "earth",
+                "id": "i02zj"
+            },           {
+                "bot_name": "Saturn",
+                "id": "i02zj"
+            },             {
+               "bot_name": "jupiter",
+               "id": "i02zj"
+            }
+         ]
+    }
+}

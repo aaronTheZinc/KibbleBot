@@ -1,0 +1,76 @@
+
+@font-face {
+    font-family: Asap;
+    src: url(../../Assets/fonts/Asap-Bold.ttf)
+}
+.full-name-lbl {
+    font-family: Asap;
+    font-size: 2vw;
+    color: #dee3ea
+
+}
+.dash-bot-name {
+    font-family: Asap;
+    font-size: 1vw;
+    color: #dee3ea;
+    padding-top: 40px;
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle
+
+}
+.dash-bot-bubble {
+    height: 120px;
+    background-color: #fd6868;
+    width: 70%;
+    margin-top: 10vh;
+    display: inline-block;
+    border-radius: 60px;
+
+}
+.bots-bubble-container {
+    display: block;
+    flex-direction:row;
+    justify-content:center;
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+
+#left-dashboard-pannel {
+    text-align: center;
+    width: 20vw;
+    height: 100vh;
+    background-color: #242C37;
+}
+
+#header-dashboard {
+    text-align: center;
+    height: 7vh;
+    background-color: #242c37;
+}
+
+#bot-name-dashboard {
+    font-family: Asap;
+    font-size: 1.5vw;
+    color: #dee3ea
+}
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: none;
+    border-radius: 30px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #fd6868;
+    border-radius: 30px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #fd6868;
+  }
