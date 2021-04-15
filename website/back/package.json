@@ -1,6 +1,5 @@
 {
     "name": "website",
-    "proxy": "http://127.0.0.1:3050/",
     "version": "1.0.0",
     "description": "",
     "main": "server.js",

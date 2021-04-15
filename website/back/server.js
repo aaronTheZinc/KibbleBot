@@ -10,23 +10,24 @@ import helmet from 'helmet'
 import session from 'express-session'
 import morgan from 'morgan'
 import passportConfig from "./auth/passport.js"
-
-passportConfig(passport)
-connectDB()
-
-const app = express();
-
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'))
-}
-
+//Redis Imports
+import connectRedis from 'connect-redis'
+import Redis from 'ioredis'
+import {REDIS_OPTIONS} from './config/redis.js'
 //Route Imports
 import userRouter from './routes/userRoutes.js'
 import botRouter from './routes/botRoutes.js'
 //3rd Part API Imports
 import spotifyApi from './services/spotify.js'
+//Passport Router Import
+import passportRouter from './routes/passportRoutes.js'
 //Middlewae Imports
 import { notFound, errorHandler } from './middlewares/errorMiddlewares.js'
+
+passportConfig(passport)
+connectDB()
+
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
@@ -35,10 +36,11 @@ app.use(cors({
 }))
 app.use(helmet())
 
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+}
+
 //Session
-import connectRedis from 'connect-redis'
-import Redis from 'ioredis'
-import {REDIS_OPTIONS} from './config/redis.js'
 
 const RedisStore = connectRedis(session)
 const client = new Redis(REDIS_OPTIONS)
@@ -59,26 +61,10 @@ app.use(
     session({ ...SESSION_OPTIONS, store})
 )
 //Pasport Auth
-
-//Passport Routes
-
-app.get('/auth/github',
-  passport.authenticate('github', { scope: [ 'user:email' ] }));
-
-app.get('/auth/github/callback', 
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-});
-
-app.get('/auth/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-});
-
 app.use(passport.initialize())
 app.use(passport.session())
+//Passport Routes
+app.use('/auth', passportRouter)
 
 //API Routes
 app.use('/api/bots', botRouter)

@@ -11,15 +11,13 @@ const githubPassport = (passport) => {
       {
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: "localhost:3000/auth/github/callback",
+        callbackURL: "/auth/github/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
           console.log('1')
         const newUser = {
           githubId: profile.id,
           displayName: profile.displayName,
-          firstName: profile.name.givenName,
-          lastName: profile.name.familyName,
           image: profile.photos[0].value,
         }
         console.log('2')
