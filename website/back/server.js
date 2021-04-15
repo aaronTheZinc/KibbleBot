@@ -78,7 +78,7 @@ app.get('/auth/logout', function(req, res){
 app.use(passport.initialize())
 app.use(passport.session())
 
-//Routes
+//API Routes
 app.use('/api/bots', botRouter)
 app.use('/api/users', userRouter)
 app.use('/api/spotify', spotifyApi)

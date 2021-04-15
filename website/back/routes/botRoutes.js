@@ -4,10 +4,12 @@ import {
   getBots,
   getBotById,
   updateBot,
+  createBot
 } from '../controllers/botController.js';
 
 botRouter.get('/', getBots)
 botRouter.get('/:id', getBotById)
-botRouter.post('/')
+botRouter.post('/', createBot)
+botRouter.put('/id', updateBot)
 
 export default botRouter;

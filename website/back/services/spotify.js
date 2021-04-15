@@ -41,7 +41,7 @@ spotifyRouter.post('/login', (req, res) => {
     })
 })
 
-spotifyRouter.get('lyrics', async(req, res) => {
+spotifyRouter.get('/lyrics', async(req, res) => {
     const lyrics = (await lyricsFinder(req.query.artist, req.query.track)) || "No Lyrics Found"
     res.json({ lyrics })
 })
