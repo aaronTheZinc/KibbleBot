@@ -11,7 +11,7 @@ const githubPassport = (passport) => {
       {
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: "/auth/github/callback",
+        callbackURL: "localhost:3000/auth/github/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
           console.log('1')
@@ -36,7 +36,7 @@ const githubPassport = (passport) => {
           }
         } catch (err) {
           console.error(err)
-          console.log('4')
+          console.log('5')
         }
       }
     )
