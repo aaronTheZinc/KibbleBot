@@ -3,15 +3,17 @@ import dotenv from 'dotenv'
 const ENV = dotenv.config()
 import path from 'path'
 import passport from 'passport'
-import GitHubStrategy from 'passport-github2'
-const OauthStrategy = GitHubStrategy.Strategy
 import connectDB from './db.js'
-connectDB()
 import {SESSION_OPTIONS} from './config/session.js'
 import cors from 'cors'
 import helmet from 'helmet'
 import session from 'express-session'
 import morgan from 'morgan'
+import passportConfig from "./auth/passport.js"
+
+passportConfig(passport)
+connectDB()
+
 const app = express();
 
 if (process.env.NODE_ENV === 'development') {
