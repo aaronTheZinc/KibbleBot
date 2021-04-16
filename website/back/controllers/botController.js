@@ -25,8 +25,8 @@ const createBot = asyncHandler(async (req, res) => {
     const {
         githubId,
         displayName,
-        username,
         image,
+        email,
         token,
         refreshToken,
         createdBy
@@ -37,6 +37,7 @@ const createBot = asyncHandler(async (req, res) => {
         displayName: displayName,
         username: username,
         image: image,
+        email: email,
         token: token,
         refreshToken: refreshToken,
         createdBy: createdBy
@@ -52,6 +53,7 @@ const updateBot = asyncHandler(async (req, res) => {
         githubId,
         displayName,
         image,
+        email,
         token,
         refreshToken,
         createdBy
@@ -63,6 +65,7 @@ const updateBot = asyncHandler(async (req, res) => {
         bot.githubIb = githubId,
         bot.displayName = displayName,
         bot.image = image,
+        bot.email = email,
         bot.token = token,
         bot.refreshToken = refreshToken,
         bot.createdBy = createdBy

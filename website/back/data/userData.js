@@ -8,6 +8,7 @@ const users = [
         githubId: "SalihSaygi",
         displayName: "SalS",
         image: "https://avatars.githubusercontent.com/u/61725374?v=4",
-        
+        email: "salih.saygie@gmail.com",
+        hasBots: []
     }
 ]

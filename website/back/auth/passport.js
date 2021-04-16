@@ -15,23 +15,22 @@ const githubPassport = (passport) => {
       },
       async (accessToken, refreshToken, profile, done) => {
           console.log('1')
-        const newUser = {
-          githubId: profile.id,
-          displayName: profile.displayName,
-          username: profile.username,
-          image: profile.photos[0].value,
-          email: profile.emails[0].value,
-        }
-        console.log('2')
         try {
-          let user = await User.findOne({ githubId: profile.id })
-
+          const user = await User.findOne({ githubId: profile.id })
+          console.log('2')
           if (user) {
             done(null, user)
             console.log('3')
           } else {
-            user = await User.create(newUser)
-            done(null, user)
+            const newUser = {
+              githubId: profile.id,
+              displayName: profile.displayName,
+              username: profile.username,
+              image: profile.photos[0].value,
+              email: profile.emails[0].value,
+            }
+            const savedUser = await newUser.save()
+            done(null, savedUser)
             console.log('4')
           }
         } catch (err) {
