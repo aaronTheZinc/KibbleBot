@@ -10,7 +10,7 @@ passportRouter.get('/login', (req, res) => {
   if(req.user) {
     res.json({
       success: true,
-      message: "User auth is succesful",
+      message: "User authentication is succesful",
       user: req.user,
     })
   }
