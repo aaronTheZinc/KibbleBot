@@ -1,0 +1,10 @@
+.primary-input {
+    display: block;
+    background: #e6e6e6;
+    font-family: Montserrat-Bold;
+    font-size: 30px;
+    border-radius: 25px;
+    padding: 0 30px;
+    outline: none;
+    font-family: Asap;
+}

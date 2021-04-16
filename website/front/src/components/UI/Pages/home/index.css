@@ -1,0 +1,85 @@
+@font-face {
+    font-family: Dela;
+    src: url(../../Assets//fonts/DelaGothicOne-Regular.ttf);
+}
+
+.big-label {
+    font-size: 90px;
+    color: #fd6868;
+    font-family: Dela;
+    font-weight: 900;
+}
+
+.textContainer {
+    padding: 5vw;
+    float: left;
+}
+
+.ussage-container {
+    float: right;
+    width: 25vw;
+    height: 100vh;
+    background-color: #242c37;
+    vertical-align: middle;
+    border-radius: 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0px
+}
+.ussage-label {
+    font-size: 50px ;
+    color: #dee3ea;
+    font-family: Arial;
+    font-weight: 900;
+}
+
+.sub-container {
+
+    display: 'flex';
+    
+}
+.bubble-container {
+    background-color: #dee3ea ;
+    width: 80%;
+    height: 15vh;
+    text-align: center;
+    margin: 0 auto;
+    border-radius: 50px;
+    margin-top: 7vh;
+    box-shadow: -2px 10px 29px 8px rgba(0,0,0,0.23);
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+}
+
+.bubble-text {
+    color:#fd6868;
+    font-size: 25px;
+    font-weight: 1000;
+    margin: 0 auto;
+    position: relative;
+    top: 30%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+
+;
+}
+.login-section {
+    margin-top: 20vh;
+}
+
+
+/* added functionalities */
+#arrow {
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+  }
+ .bubble-container:hover {
+    top: -10px;
+  }
+  
+  body {
+    background-color: #151a21;
+  }

@@ -1,0 +1,66 @@
+@font-face {
+    font-family: Asap;
+    src: url(../../Assets/fonts/Asap-Bold.ttf)
+}
+.main-create-bot {
+    width: 100vw;
+    height: 100vh;
+    margin: 0%;
+}
+
+.new-bot-container {
+    display: flex;
+
+}
+
+.new-bot-lbl-container {
+    float: left;
+    margin: 20vh;
+    text-align: center;
+}
+.new-bot-lbl {
+    font-family: Asap;
+    color: #DEE3EA;
+    font-size: 4vw;;
+
+}
+
+.new-bot-form-container {
+    float: right;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+
+    
+}
+.new-bot-form {
+    background-color: #FD6868;
+    height: 80vh;
+    border-radius: 30px;
+    width: 50vw;
+    margin-top: 5vh;
+    margin-left: 5vw;
+}
+
+.create-bot-button {
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 50vh;
+    margin: 0
+}
+
+.new-bot-input-container {
+    display: grid;
+    grid-template-columns: auto auto ;
+    
+}
+
+body {
+    overflow-y: hidden;
+
+}
+
+  

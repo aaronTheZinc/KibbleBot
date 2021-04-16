@@ -1,0 +1,21 @@
+{
+  "name": "kibble",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "commit": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@naval-base/ms": "^3.1.0",
+    "dogehouse.js": "^2.0.2",
+    "dotenv": "^8.2.0",
+    "nodemailer": "^6.5.0",
+    "prompt": "^1.1.0",
+    "prompts": "^2.4.1"
+  }
+}
