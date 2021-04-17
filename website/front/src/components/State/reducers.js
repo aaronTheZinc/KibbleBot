@@ -1,8 +1,10 @@
-import { loginWithGitHub, loginWithSpotify } from "./actions";
+import { loginWithGitHub, loginWithSpotify } from "./actions/loginActions";
+import { setCurrentUser } from './actions/authActions'
 
-const initialAppState = {
+const initialUserState = {
   isAuthenticated: false,
   token: null,
+  refreshToken: null,
 };
 
 const stateReducer = (state, action) => {
@@ -11,22 +13,31 @@ const stateReducer = (state, action) => {
       loginWithGitHub();
     case "spotify/auth":
       loginWithSpotify()
+    case "SET_USER":
+      setCurrentUser()
+      
   }
 };
 
 const initialBotState = {
-  displayName: "",
-  image: "",
+  isAuthenticated: false,
+  token: null,
+  refreshToken: null
 };
 
-const initialSpotifyState = {
-  
-}
-const newBotReducer = (state, action) => {};
+//since user doesn't enter it, no token fields
+
+
+const newBotReducer = (state, action) => {
+  switch (action.type) {
+    case "github/bot":
+      
+  }
+};
 
 const initialNewBotState = {
     displayName: 'KibbleBot',
-    image: '',
+    image: 'https://github.com/identicons/app/oauth_app/1596867',
     token: '',
     refreshToken: ''
 }
@@ -38,8 +49,12 @@ const setNewBotReducer = (state, action) => {
   }
 };
 
+const initialSpotifyState = {
+  isAuthenticated: false
+}
+
 export default {
-  AppReducer: { initialAppState, stateReducer },
-  newBot: {initialAppState, setNewBotReducer},
+  UserReducer: { initialUserState, stateReducer },
+  newBot: {initialBotState, setNewBotReducer},
 
 };

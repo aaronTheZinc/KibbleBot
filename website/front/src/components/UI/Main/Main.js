@@ -9,10 +9,10 @@ export default function Main() {
   return (
     <>
     <Nav/>
-
       <Router>
-      <Route path="/home" component={Home} />
-      <Route path="/audio" component={SpotifyHub}/>
+        <Route path="/home" component={Home} />
+        <Route path="/dashboard" component={DashboardController}/>
+        <Route path="/audio" component={SpotifyHub}/>
         <Route path="/dashboard/newbot" component={CreateNewBot} />
       </Router>
     </>

@@ -8,8 +8,10 @@ class Bot {
              token: '',
              refreshToken: ''
          },
-         commands: []
-
+         createdBy: '',
+         updatedAt: '',
+         createdAt: '',
+        //  commands: []
      }
     
 }
@@ -17,4 +19,23 @@ create = ({ discordId, botName, imageUrl, tokens, commands,  }) => {
 
 }
 }
-export {Bot}
+
+class User {
+    constructor() {
+        this.new = {
+         discordId: '',
+         displayName: '',
+         profileImage: '',
+         tokens: {
+             token: '',
+             refreshToken: ''
+         },
+         hasBots: [],
+         updatedAt: '',
+         createdAt: '',
+        //  commands: []
+     }
+    }
+}
+
+export {Bot,User}

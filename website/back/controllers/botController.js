@@ -4,49 +4,23 @@ import Bot from '../models/botModel.js';
 //GET
 
 const getBots = asyncHandler(async (req, res) => {
-  const bots = await Bot.find({});
+  const bots = await Bot.find({})
+    .populate('user').sort({updatedAt: 'desc'}).lean();
   res.json(bots);
 });
 
 const getBotById = asyncHandler(async (req, res) => {
-  const bot = await Bot.findById(req.params.id);
+  const bot = await (await Bot.findById(req.params.id)).
+    populated('user').lean();
   if (bot) {
     res.json(bot);
   } else {
     res.status(404);
-    throw new Error('Product not found');
+    throw new Error('Bot not found');
   }
 });
 
 //POST
-
-const createBot = asyncHandler(async (req, res) => {
-
-    const {
-        githubId,
-        displayName,
-        image,
-        email,
-        token,
-        refreshToken,
-        createdBy
-    } = req.body
-
-    const bot = new Bot({
-        githubId: githubId,
-        displayName: displayName,
-        username: username,
-        image: image,
-        email: email,
-        token: token,
-        refreshToken: refreshToken,
-        createdBy: createdBy
-    })
-
-    const createdBot = await bot.save()
-    res.status(201).json(createdBot)
-})
-
 const updateBot = asyncHandler(async (req, res) => {
 
     const {
@@ -59,7 +33,7 @@ const updateBot = asyncHandler(async (req, res) => {
         createdBy
     } = req.body
 
-    const bot = await Bot.findById(req.params.id)
+    const bot = await Bot.findById(req.params.id).populated('user').lean()
 
     if(bot) {
         bot.githubIb = githubId,
@@ -79,4 +53,4 @@ const updateBot = asyncHandler(async (req, res) => {
 
 })
 
-export { getBots, getBotById, createBot, updateBot };
+export { getBots, getBotById, updateBot };

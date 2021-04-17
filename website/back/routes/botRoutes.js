@@ -3,13 +3,11 @@ const botRouter = express.Router();
 import {
   getBots,
   getBotById,
-  updateBot,
-  createBot
+  updateBot
 } from '../controllers/botController.js';
 
 botRouter.get('/', getBots)
 botRouter.get('/:id', getBotById)
-botRouter.post('/', createBot)
-botRouter.put('/id', updateBot)
+botRouter.put('/:id', updateBot)
 
 export default botRouter;
